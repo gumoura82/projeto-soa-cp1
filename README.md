@@ -275,3 +275,11 @@ http://localhost:8081/api/checkout/frete?peso=-1
 * **Observabilidade** — logs correlacionados para rastrear requisições ponta a ponta
 * **Testes E2E** — cobertura completa do fluxo REST → SOAP → REST
 * **Configuração por ambiente** — profiles para dev, staging e produção
+
+## Nomes e RMs
+
+Leonardo Pasquini Baldaia | 557416 
+Gustavo Oliveira de Moura | 555827 
+Lynn Bueno Rosa | 551102
+Giovanne Charelli Zaniboni Silva | 556223
+
