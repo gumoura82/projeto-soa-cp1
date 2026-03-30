@@ -1,12 +1,10 @@
-# 📦 CP1 - Integração SOA com SOAP
+# CP1 - Integração SOA com SOAP 
 
-Projeto acadêmico que demonstra, de forma prática, a **publicação e consumo de um serviço SOAP** em um cenário de integração B2B entre sistemas.
+Projeto que demonstra, de forma prática, a **publicação e consumo de um serviço SOAP** em um cenário de integração B2B entre sistemas.
 
 O caso simulado representa um **e-commerce consumindo o serviço de cálculo de frete de uma transportadora**, utilizando um contrato XML formal (XSD).
 
----
-
-## 📌 O Caso de Uso: E-commerce + Transportadora
+## O Caso de Uso: E-commerce + Transportadora
 
 ```
 ┌──────────────────┐                    ┌────────────────────┐
@@ -34,9 +32,8 @@ O caso simulado representa um **e-commerce consumindo o serviço de cálculo de 
 - Transportadora aplica regras de negócio e retorna frete + prazo
 - E-commerce exibe o resultado em JSON para o cliente
 
----
 
-## 🎯 Objetivo
+## Objetivo
 
 Atender aos seguintes requisitos:
 
@@ -49,26 +46,14 @@ Atender aos seguintes requisitos:
     * Boas práticas adotadas
     * Evoluções futuras
 
----
-
-## 🧠 Visão Geral da Solução
+## Visão Geral da Solução
 
 O projeto é composto por **dois sistemas independentes**:
 
 * `transportadora-server` → Serviço SOAP (provedor)
 * `ecommerce-client` → Consumidor SOAP + API REST
 
-### � Cenário de Negócio
-
-Um e-commerce precisa oferecer aos seus clientes o cálculo do frete na **hora do checkout**. Para isso, ele não mantém sua própria tabela de fretes, mas sim consome um serviço corporativo de uma transportadora parceira. 
-
-Esse tipo de integração é comum em cenários B2B, onde:
-- A transportadora expõe um serviço padronizado (SOAP/WebService)
-- Múltiplos e-commerces e marketplaces podem consumir esse serviço
-- A comunicação é baseada em um **contrato versionável (XSD)** que ambas as partes concordam
-- O consumidor não precisa conhecer os detalhes internos da transportadora
-
-### 🔄 Fluxo da Integração
+### Fluxo da Integração
 
 1. **Cliente acessa o e-commerce** e inicia o checkout com um produto
 2. **E-commerce consultado para simular frete** → chama a API REST GET `/api/checkout/frete` com CEP origem, CEP destino e peso
@@ -78,9 +63,7 @@ Esse tipo de integração é comum em cenários B2B, onde:
 6. **E-commerce converte resposta SOAP → JSON** e devolve ao cliente da loja
 7. **Cliente visualiza frete estimado** e pode finalizar a compra
 
----
-
-## 🏗️ Arquitetura
+## Arquitetura
 
 Arquitetura baseada em **SOA (Service-Oriented Architecture)** com desacoplamento por contrato:
 
@@ -98,9 +81,7 @@ Arquitetura baseada em **SOA (Service-Oriented Architecture)** com desacoplament
 | Transportadora | 8080  |
 | E-commerce     | 8081  |
 
----
-
-## 🛠️ Stack Tecnológica
+## Stack Tecnológica
 
 * Java 17+ / 21
 * Spring Boot 3.4.4
@@ -109,9 +90,7 @@ Arquitetura baseada em **SOA (Service-Oriented Architecture)** com desacoplament
 * JAXB (via `jaxb2-maven-plugin`)
 * Maven Wrapper
 
----
-
-## 🌍 Contexto de Implantação
+## Contexto de Implantação
 
 **Simulação de integração corporativa entre empresas em um checkout real:**
 
@@ -124,9 +103,7 @@ O e-commerce **não calcula o frete localmente**. Todos os cálculos são delega
 
 **Tecnicamente:** A comunicação ocorre via **SOAP (Simple Object Access Protocol)** — um padrão corporativo amplamente utilizado em integrações B2B. O **contrato XSD (frete.xsd)** é versionável e desacopla provider do consumer. Esse padrão reflete cenários reais em indústrias como varejo, logística, seguros e financeiro.
 
----
-
-## 🚧 Problemas Resolvidos
+## Problemas Resolvidos
 
 * Integração entre sistemas desacoplados
 * Padronização de comunicação via contrato
@@ -134,9 +111,7 @@ O e-commerce **não calcula o frete localmente**. Todos os cálculos são delega
 * Validação consistente de dados
 * Reutilização do serviço por múltiplos consumidores
 
----
-
-## ✅ Boas Práticas Aplicadas
+## Boas Práticas Aplicadas
 
 * **Contract-first** (XSD definido antes da implementação)
 * Separação clara de responsabilidades
@@ -147,8 +122,6 @@ O e-commerce **não calcula o frete localmente**. Todos os cálculos são delega
     * SOAP Fault (provedor)
     * HTTP status (consumidor)
 * Testes unitários de regras e integração
-
----
 
 ## 📋 Regra de Negócio
 
@@ -178,9 +151,7 @@ O e-commerce **não calcula o frete localmente**. Todos os cálculos são delega
 * Peso não pode ser negativo
 * Erros geram **falha funcional (SOAP Fault)**
 
----
-
-## 📄 Contrato SOAP
+## Contrato SOAP
 
 Localização:
 
@@ -199,9 +170,7 @@ Usado para:
 * Geração do WSDL
 * Geração de classes JAXB (server + client)
 
----
-
-## 🔗 Endpoints
+## Endpoints
 
 ### SOAP (Transportadora)
 
@@ -222,7 +191,7 @@ http://localhost:8081/api/checkout/frete?cepOrigem=11000000&cepDestino=01001000&
 
 ---
 
-## 📦 Exemplo de Resposta
+## Exemplo de Resposta
 
 ```json
 {
@@ -236,9 +205,7 @@ http://localhost:8081/api/checkout/frete?cepOrigem=11000000&cepDestino=01001000&
 }
 ```
 
----
-
-## ❌ Tratamento de Erros
+## Tratamento de Erros
 
 Casos tratados:
 
@@ -251,9 +218,7 @@ Fluxo:
 * SOAP retorna **Fault**
 * REST traduz para **HTTP apropriado**
 
----
-
-## ▶️ Como Executar
+## Como Executar
 
 ### Pré-requisitos
 
@@ -283,9 +248,7 @@ cd ecommerce-client
 
 > A transportadora deve estar no ar antes de iniciar o e-commerce.
 
----
-
-## 🧪 Como Testar
+## Como Testar
 
 1. Acessar WSDL:
 
@@ -305,9 +268,7 @@ http://localhost:8081/api/checkout/frete?cepOrigem=11000000&cepDestino=01001000&
 http://localhost:8081/api/checkout/frete?peso=-1
 ```
 
----
-
-## 🚀 Próximas Evoluções
+## Próximas Evoluções
 
 * **WS-Security** — autenticação entre sistemas B2B em produção exige controle de acesso no nível do serviço
 * **Cache de cotações** — evitar chamadas SOAP redundantes para os mesmos parâmetros
