@@ -1,0 +1,55 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< br.com.cp1:transportadora-server >------------------
+[INFO] Building transportadora-server 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.4.4:run (default-cli) > test-compile @ transportadora-server >>>
+[INFO] 
+[INFO] --- jaxb2:3.2.0:xjc (xjc) @ transportadora-server ---
+[INFO] Ignored given or default xjbSources [C:\Users\gumou\OneDrive\Documentos\projeto-soa-cp1\transportadora-server\transportadora-server\src\main\xjb], since it is not an existent file or directory.
+[INFO] No changes detected in schema or binding files - skipping JAXB generation.
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ transportadora-server ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ transportadora-server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ transportadora-server ---
+[INFO] skip non existing resourceDirectory C:\Users\gumou\OneDrive\Documentos\projeto-soa-cp1\transportadora-server\transportadora-server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ transportadora-server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.4.4:run (default-cli) < test-compile @ transportadora-server <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.4.4:run (default-cli) @ transportadora-server ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.4)
+
+2026-03-27T15:52:00.522-03:00  INFO 21560 --- [transportadora-server] [           main] b.c.c.t.TransportadoraServerApplication  : Starting TransportadoraServerApplication using Java 17.0.12 with PID 21560 (C:\Users\gumou\OneDrive\Documentos\projeto-soa-cp1\transportadora-server\transportadora-server\target\classes started by gumou in C:\Users\gumou\OneDrive\Documentos\projeto-soa-cp1\transportadora-server\transportadora-server)
+2026-03-27T15:52:00.526-03:00  INFO 21560 --- [transportadora-server] [           main] b.c.c.t.TransportadoraServerApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-03-27T15:52:01.471-03:00  INFO 21560 --- [transportadora-server] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-03-27T15:52:01.485-03:00  INFO 21560 --- [transportadora-server] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-03-27T15:52:01.486-03:00  INFO 21560 --- [transportadora-server] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.39]
+2026-03-27T15:52:01.541-03:00  INFO 21560 --- [transportadora-server] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-03-27T15:52:01.543-03:00  INFO 21560 --- [transportadora-server] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 978 ms
+2026-03-27T15:52:01.652-03:00  INFO 21560 --- [transportadora-server] [           main] .w.s.a.s.AnnotationActionEndpointMapping : Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2026-03-27T15:52:01.947-03:00  INFO 21560 --- [transportadora-server] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-03-27T15:52:01.955-03:00  INFO 21560 --- [transportadora-server] [           main] b.c.c.t.TransportadoraServerApplication  : Started TransportadoraServerApplication in 1.79 seconds (process running for 2.068)
+2026-03-27T15:52:16.077-03:00  INFO 21560 --- [transportadora-server] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring MessageDispatcherServlet 'messageDispatcherServlet'
+2026-03-27T15:52:16.079-03:00  INFO 21560 --- [transportadora-server] [nio-8080-exec-1] o.s.w.t.http.MessageDispatcherServlet    : Initializing Servlet 'messageDispatcherServlet'
+2026-03-27T15:52:16.083-03:00  INFO 21560 --- [transportadora-server] [nio-8080-exec-1] o.s.ws.soap.saaj.SaajSoapMessageFactory  : Creating SAAJ 1.3 MessageFactory with SOAP 1.1 Protocol
+2026-03-27T15:52:16.096-03:00  INFO 21560 --- [transportadora-server] [nio-8080-exec-1] o.s.w.t.http.MessageDispatcherServlet    : Completed initialization in 17 ms

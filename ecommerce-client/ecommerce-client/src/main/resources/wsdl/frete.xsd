@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.cp1.com.br/frete/ws"
+           xmlns:tns="http://www.cp1.com.br/frete/ws"
+           elementFormDefault="qualified">
+
+    <xs:element name="calcularFreteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cepOrigem" type="tns:cepType"/>
+                <xs:element name="cepDestino" type="tns:cepType"/>
+                <xs:element name="peso" type="xs:decimal"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="calcularFreteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="valorFrete" type="xs:decimal"/>
+                <xs:element name="prazoEntregaDias" type="xs:int"/>
+                <xs:element name="transportadora" type="xs:string"/>
+                <xs:element name="observacao" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="freteFault">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="codigo" type="xs:string"/>
+                <xs:element name="mensagem" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="cepType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
