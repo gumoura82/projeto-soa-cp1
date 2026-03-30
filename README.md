@@ -6,6 +6,36 @@ O caso simulado representa um **e-commerce consumindo o serviço de cálculo de 
 
 ---
 
+## 📌 O Caso de Uso: E-commerce + Transportadora
+
+```
+┌──────────────────┐                    ┌────────────────────┐
+│   Cliente da     │                    │   E-commerce       │
+│    Loja Online   │  (Checkout)        │   (REST API)       │
+│                  ├───────────────────→│                    │
+│  Qual é o frete? │                    │ GET /api/checkout/ │
+│                  │←───────────────────┤      frete         │
+│  R$ 19,00 em     │ (Frete com prazo)  │                    │
+│  2 dias          │                    └────────┬───────────┘
+└──────────────────┘                             │ (SOAP)
+                                                 │
+                                        ┌────────▼──────────┐
+                                        │ Transportadora     │
+                                        │ (SOAP WebService)  │
+                                        │                    │
+                                        │ calcularFrete()    │
+                                        │ (Regras de negócio)│
+                                        └────────────────────┘
+```
+
+**Resumo:**
+- Cliente acessa o e-commerce querendo saber o frete
+- E-commerce **chama em tempo real** um serviço SOAP da transportadora
+- Transportadora aplica regras de negócio e retorna frete + prazo
+- E-commerce exibe o resultado em JSON para o cliente
+
+---
+
 ## 🎯 Objetivo
 
 Atender aos seguintes requisitos:
@@ -28,13 +58,25 @@ O projeto é composto por **dois sistemas independentes**:
 * `transportadora-server` → Serviço SOAP (provedor)
 * `ecommerce-client` → Consumidor SOAP + API REST
 
+### � Cenário de Negócio
+
+Um e-commerce precisa oferecer aos seus clientes o cálculo do frete na **hora do checkout**. Para isso, ele não mantém sua própria tabela de fretes, mas sim consome um serviço corporativo de uma transportadora parceira. 
+
+Esse tipo de integração é comum em cenários B2B, onde:
+- A transportadora expõe um serviço padronizado (SOAP/WebService)
+- Múltiplos e-commerces e marketplaces podem consumir esse serviço
+- A comunicação é baseada em um **contrato versionável (XSD)** que ambas as partes concordam
+- O consumidor não precisa conhecer os detalhes internos da transportadora
+
 ### 🔄 Fluxo da Integração
 
-1. Cliente chama o endpoint REST do e-commerce
-2. O e-commerce monta uma requisição SOAP
-3. A transportadora processa a cotação
-4. O serviço SOAP retorna a resposta
-5. O e-commerce converte para JSON e responde ao cliente
+1. **Cliente acessa o e-commerce** e inicia o checkout com um produto
+2. **E-commerce consultado para simular frete** → chama a API REST GET `/api/checkout/frete` com CEP origem, CEP destino e peso
+3. **E-commerce monta requisição SOAP** com os dados recebidos
+4. **Transportadora processa a cotação** aplicando regras de negócio (localização, peso, etc)
+5. **Transportadora retorna resposta SOAP** com valor do frete e prazo de entrega
+6. **E-commerce converte resposta SOAP → JSON** e devolve ao cliente da loja
+7. **Cliente visualiza frete estimado** e pode finalizar a compra
 
 ---
 
@@ -42,13 +84,12 @@ O projeto é composto por **dois sistemas independentes**:
 
 Arquitetura baseada em **SOA (Service-Oriented Architecture)** com desacoplamento por contrato:
 
-* **Provedor:** transportadora-server
-* **Consumidor:** ecommerce-client
-* **Contrato:** `frete.xsd`
-* **Comunicação interna:** SOAP over HTTP
-* **Exposição externa:** REST
+* **Provedor:** transportadora-server ← Expõe o serviço de frete (SOAP)
+* **Consumidor:** ecommerce-client ← Consome o serviço para responder a clientes (REST)
+* **Contrato:** `frete.xsd` ← Define a estrutura de requisições e respostas
+* **Comunicação:** SOAP over HTTP ← Padrão corporativo W3C
 
-> Ambos os sistemas estão no mesmo repositório por conveniência acadêmica — conceitualmente são independentes.
+> Ambos os sistemas estão no mesmo repositório por conveniência acadêmica — mas **conceitualmente são independentes** e poderiam rodar em servidores, empresas e datacenters diferentes em um cenário real.
 
 ### 🔌 Portas
 
@@ -72,13 +113,16 @@ Arquitetura baseada em **SOA (Service-Oriented Architecture)** com desacoplament
 
 ## 🌍 Contexto de Implantação
 
-Simulação de integração entre empresas:
+**Simulação de integração corporativa entre empresas em um checkout real:**
 
-* A transportadora expõe um serviço corporativo de frete
-* O e-commerce consome sem conhecer a implementação interna
-* A comunicação é baseada em um **contrato versionável (XSD)**
+O e-commerce **não calcula o frete localmente**. Todos os cálculos são delegados ao serviço SOAP da transportadora. Isso permite:
 
-Isso reflete um cenário real de integração entre sistemas heterogêneos.
+* ✅ A transportadora manter regras de negócio centralizadas e versionadas
+* ✅ Múltiplos e-commerces consumindo o mesmo serviço sem duplicar código
+* ✅ Atualizações na transportadora refletem imediatamente em todos os consumidores
+* ✅ Redução de acoplamento entre sistemas — se a implementação interna da transportadora mudar, o contrato (XSD) permanece compatível
+
+**Tecnicamente:** A comunicação ocorre via **SOAP (Simple Object Access Protocol)** — um padrão corporativo amplamente utilizado em integrações B2B. O **contrato XSD (frete.xsd)** é versionável e desacopla provider do consumer. Esse padrão reflete cenários reais em indústrias como varejo, logística, seguros e financeiro.
 
 ---
 
